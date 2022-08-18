@@ -3,18 +3,25 @@ from time import sleep
 
 
 def log_time(func):  # that function itself
-    def timer(n):  # and its argrument
+    def mediator(*args, **kwargs):  # and its argrument
+        # do something before that
         start = datetime.now()
-        res = func(n)
+        # call itself
+        res = func(*args, **kwargs)
+        # we have its return value and do smothing with it...
+        print(f"The result was: {res}")
         print(f"functions executed in {(datetime.now() - start).total_seconds()} seconds!")
+        # an then return it to user
         return res
 
-    return timer
+    # docrator logic
+    return mediator
 
 
 @log_time
-def use_decorator(n):
-    sleep(n)
+def use_decorator():
+    sleep(1)
+    return 'OK'
 
 
-use_decorator(2)
+use_decorator()

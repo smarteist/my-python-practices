@@ -1,13 +1,15 @@
+import math
 from abc import abstractmethod, ABC
 
 
-class Shape:
+class Shape(ABC):
     # CLASS WIDE STATIC LIST
     staticList = []
 
     def __init__(self):
         self.staticList.append(self)
 
+    @abstractmethod
     def getarea(self):
         pass
 
@@ -16,24 +18,31 @@ class Shape:
         pass
 
 
-class Circle(Shape, ABC):
+class Circle(Shape):
 
     def __init__(self, radius):
         super(Circle, self).__init__()
         self.radius = radius
-        print(self.radius)
+
+    def getarea(self):
+        return math.pi * self.radius ** 2
+
+    def getcircumference(self):
+        return 2 * math.pi * self.radius
 
 
 class Square(Shape, ABC):
 
     def __init__(self, width, height):
         super(Square, self).__init__()
-        self.staticList.append(self)
         self.height = height
         self.width = width
 
     def getarea(self):
         return self.width * self.height
+
+    def getcircumference(self):
+        return 2 * self.width + 2 * self.height
 
 
 circle_1 = Circle(radius=2)

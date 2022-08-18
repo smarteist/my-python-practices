@@ -12,6 +12,7 @@ class Alive(ABC):
         pass
 
 
+# Human extends Alive
 class Human(Alive):
 
     def move(self):
